@@ -1,0 +1,6 @@
+[gd_resource type="OccluderPolygon2D" format=3 uid="uid://hchcssji4j7e"]
+
+[resource]
+resource_local_to_scene = true
+resource_name = "PlayerCorridorOccluder"
+polygon = PackedVector2Array(-27.8643, 2.85559, -12.6951, 2.85559, -7.87851, 1.14223)

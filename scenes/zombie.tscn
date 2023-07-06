@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://barwyr6ba7xsv"]
+
+[ext_resource type="Script" path="res://scenes/zombie.gd" id="1_xw2fw"]
+[ext_resource type="SpriteFrames" uid="uid://chxdbtae7gg4l" path="res://assets/sprites/Zombie.tres" id="2_vrsvu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_axo8l"]
+size = Vector2(13, 6)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jrnt4"]
+radius = 46.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nb0p6"]
+radius = 21.0
+
+[node name="Zombie" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 3
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_xw2fw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_vrsvu")
+animation = &"idle_down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 11)
+shape = SubResource("RectangleShape2D_axo8l")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(1, 3)
+scale = Vector2(0.552632, 1)
+rect = Rect2(-12, -10, 20, 20)
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(0, 7)
+shape = SubResource("CircleShape2D_jrnt4")
+
+[node name="AttackArea" type="Area2D" parent="." groups=["attack_area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(0, 7)
+shape = SubResource("CircleShape2D_nb0p6")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="RoamingTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="timeout" from="RoamingTimer" to="." method="_on_roaming_timer_timeout"]

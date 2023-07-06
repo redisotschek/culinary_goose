@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://de2s63ng55phd"]
+
+[ext_resource type="Script" path="res://scenes/SceneControl.gd" id="1_agb6w"]
+
+[node name="SceneControl" type="Node2D"]
+script = ExtResource("1_agb6w")

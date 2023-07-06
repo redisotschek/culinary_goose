@@ -1,0 +1,101 @@
+[gd_scene load_steps=9 format=3 uid="uid://cuqf7hho74apw"]
+
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_fon34"]
+[ext_resource type="SpriteFrames" uid="uid://dpkmdhnxcde1b" path="res://assets/sprites/Generic.tres" id="2_wciny"]
+[ext_resource type="Texture2D" uid="uid://txvthg6rktjm" path="res://assets/sprites/point_light_radial.png" id="3_r6mby"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xcl2a"]
+size = Vector2(13, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vtyf3"]
+size = Vector2(13.5, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0ogn"]
+size = Vector2(11.8751, 20.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5fiyd"]
+size = Vector2(13.5, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pn1go"]
+size = Vector2(13.5, 20)
+
+[node name="Player" type="CharacterBody2D" groups=["survivors"]]
+z_index = 1
+position = Vector2(335, -19)
+motion_mode = 1
+slide_on_ceiling = false
+floor_stop_on_slope = false
+floor_block_on_wall = false
+platform_floor_layers = 1
+platform_wall_layers = 1
+script = ExtResource("1_fon34")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 8)
+shape = SubResource("RectangleShape2D_xcl2a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -5)
+sprite_frames = ExtResource("2_wciny")
+animation = &"idle_down"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1, -5)
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+
+[node name="AttackArea_left" type="Area2D" parent="." groups=["attack_area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea_left" groups=["attack_area"]]
+position = Vector2(-15, 0)
+shape = SubResource("RectangleShape2D_vtyf3")
+disabled = true
+
+[node name="AttackArea_up" type="Area2D" parent="." groups=["attack_area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea_up" groups=["attack_area"]]
+position = Vector2(1, -13)
+rotation = -1.57079
+shape = SubResource("RectangleShape2D_v0ogn")
+disabled = true
+
+[node name="AttackArea_right" type="Area2D" parent="." groups=["attack_area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea_right" groups=["attack_area"]]
+position = Vector2(17, 0)
+shape = SubResource("RectangleShape2D_5fiyd")
+disabled = true
+
+[node name="AttackArea_down" type="Area2D" parent="." groups=["attack_area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea_down" groups=["attack_area"]]
+position = Vector2(1, 13)
+rotation = -1.57079
+shape = SubResource("RectangleShape2D_pn1go")
+disabled = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0.885757, 7.01161)
+enabled = false
+energy = 0.13
+texture = ExtResource("3_r6mby")
+texture_scale = 0.94
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="FollowTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="AttackArea_left" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_entered" from="AttackArea_up" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_entered" from="AttackArea_right" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_entered" from="AttackArea_down" to="." method="_on_attack_area_body_entered"]
+[connection signal="navigation_finished" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_navigation_finished"]
+[connection signal="target_reached" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_target_reached"]
+[connection signal="timeout" from="FollowTimer" to="." method="_on_follow_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

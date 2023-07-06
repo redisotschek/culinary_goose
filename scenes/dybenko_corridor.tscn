@@ -1,0 +1,193 @@
+[gd_scene load_steps=22 format=3 uid="uid://d2ivec2ulx5f1"]
+
+[ext_resource type="Script" path="res://scenes/dybenko_corridor.gd" id="1_u6tr7"]
+[ext_resource type="PackedScene" uid="uid://dgym82qyi70yj" path="res://assets/tiles/TileMaps/outside.tscn" id="2_ivh78"]
+[ext_resource type="PackedScene" uid="uid://cuqf7hho74apw" path="res://scenes/player.tscn" id="2_jkuqk"]
+[ext_resource type="PackedScene" uid="uid://dqobjpld5vskf" path="res://assets/tiles/TileMaps/interior.tscn" id="3_4q0i0"]
+[ext_resource type="Texture2D" uid="uid://txvthg6rktjm" path="res://assets/sprites/point_light_radial.png" id="3_t2y68"]
+[ext_resource type="PackedScene" uid="uid://xf1i2wv00uoo" path="res://scenes/level_exit.tscn" id="5_0jo3i"]
+[ext_resource type="PackedScene" uid="uid://x6jmdueju0wy" path="res://scenes/bolshevikov_street.tscn" id="6_63fav"]
+[ext_resource type="Texture2D" uid="uid://b6j02ca1jrvn" path="res://assets/sprites/overlay.png" id="6_fysw5"]
+[ext_resource type="PackedScene" uid="uid://barwyr6ba7xsv" path="res://scenes/zombie.tscn" id="9_imuwi"]
+[ext_resource type="PackedScene" uid="uid://de2s63ng55phd" path="res://scenes/Controls/scene_control.tscn" id="10_gnala"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6etvj"]
+size = Vector2(191.989, 188)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yje8u"]
+size = Vector2(20, 454.558)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikime"]
+size = Vector2(9.58764, 188.622)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wkjbw"]
+size = Vector2(9.96362, 192.887)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kq250"]
+size = Vector2(1.08096, 28.4598)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jscre"]
+size = Vector2(316.585, 5.7741)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmn0y"]
+size = Vector2(507.085, 8.60174)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qklrs"]
+size = Vector2(507.085, 8.60174)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w4oo5"]
+size = Vector2(17.8305, 295.657)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_66tpj"]
+size = Vector2(623.085, 31.3147)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_dpalj"]
+vertices = PackedVector2Array(609, -13, 639, -18, 655, -15, 656, 112, 560, 112, 595, 0, -46, -112, -16, -112, -16, -65, -48, -4, 592, -16, 591, -5, 290, -65, 320, -64, 289, -116, 176, -116, 176, -304, 368, -304, 368, -116, 320, -116, 639, -64, 560, 0)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 11, 9, 8, 12, 13), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(17, 18, 19), PackedInt32Array(14, 17, 19, 12), PackedInt32Array(12, 19, 13), PackedInt32Array(10, 13, 20, 1), PackedInt32Array(0, 10, 1), PackedInt32Array(5, 4, 21)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-46, -112, -16, -112, -16, -65, 290, -65, 289, -116, 176, -116, 176, -304, 368, -304, 368, -116, 320, -116, 320, -64, 639, -64, 639, -18, 655, -15, 656, 112, 560, 112, 560, 0, 595, 0, 609, -13, 592, -16, 591, -5, -48, -4)])
+
+[node name="DybenkoCorridor" type="Node2D"]
+position = Vector2(48, 320)
+script = ExtResource("1_u6tr7")
+
+[node name="Outside" parent="." instance=ExtResource("2_ivh78")]
+
+[node name="Interior" parent="." instance=ExtResource("3_4q0i0")]
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+position = Vector2(-295, -44)
+rotation = -1.57259
+color = Color(1, 0.788235, 0.72549, 1)
+energy = 0.86
+blend_mode = 2
+shadow_enabled = true
+shadow_color = Color(0.0470588, 0.0352941, 0.027451, 0.756863)
+height = 1.0
+
+[node name="Apartment" type="Area2D" parent="."]
+position = Vector2(271, -208)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Apartment"]
+position = Vector2(0.00540161, -1.99998)
+shape = SubResource("RectangleShape2D_6etvj")
+
+[node name="PointLight2D" type="PointLight2D" parent="Apartment"]
+modulate = Color(1, 1, 0.372549, 1)
+self_modulate = Color(1, 1, 0.513726, 1)
+position = Vector2(89, -71)
+color = Color(0.858824, 0.713726, 0.568627, 0.65098)
+energy = 1.11
+blend_mode = 2
+texture = ExtResource("3_t2y68")
+texture_scale = 3.58
+
+[node name="Zombie" parent="Apartment" instance=ExtResource("9_imuwi")]
+position = Vector2(-24, -5)
+
+[node name="Zombie2" parent="Apartment" instance=ExtResource("9_imuwi")]
+position = Vector2(-31, -2)
+
+[node name="InverseLight" type="PointLight2D" parent="Apartment"]
+modulate = Color(1, 1, 0.372549, 1)
+self_modulate = Color(1, 1, 0.513726, 1)
+position = Vector2(0.500003, -2)
+scale = Vector2(1.06021, 1.04373)
+color = Color(0.52549, 0.52549, 0.52549, 0.176471)
+energy = 1.65
+blend_mode = 1
+texture = ExtResource("6_fysw5")
+texture_scale = 1.48
+
+[node name="Player" parent="." instance=ExtResource("2_jkuqk")]
+position = Vector2(32, -64)
+platform_on_leave = 2
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+modulate = Color(1, 1, 0.372549, 1)
+self_modulate = Color(1, 1, 0.513726, 1)
+position = Vector2(608, 48)
+color = Color(0.858824, 0.713726, 0.568627, 0.65098)
+energy = 1.11
+blend_mode = 2
+texture = ExtResource("3_t2y68")
+texture_scale = 1.06
+
+[node name="LevelExit" parent="." instance=ExtResource("5_0jo3i")]
+position = Vector2(643, 3)
+scale = Vector2(3, 2)
+next_scene = ExtResource("6_63fav")
+
+[node name="Zombie" parent="." instance=ExtResource("9_imuwi")]
+position = Vector2(113, -45)
+
+[node name="Zombie2" parent="." instance=ExtResource("9_imuwi")]
+position = Vector2(322, -61)
+
+[node name="Zombie3" parent="." instance=ExtResource("9_imuwi")]
+position = Vector2(597, 40)
+
+[node name="Zombie4" parent="." instance=ExtResource("9_imuwi")]
+position = Vector2(508, -65)
+
+[node name="Borders" type="StaticBody2D" parent="." groups=["borders"]]
+position = Vector2(-8, 32)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders" groups=["borders"]]
+position = Vector2(248, 24.2066)
+scale = Vector2(31.9161, 0.258684)
+shape = SubResource("RectangleShape2D_yje8u")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders" groups=["borders"]]
+position = Vector2(145, -119.397)
+scale = Vector2(31.9161, 0.258684)
+shape = SubResource("RectangleShape2D_ikime")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Borders" groups=["borders"]]
+position = Vector2(488, -118.948)
+scale = Vector2(31.9161, 0.258684)
+shape = SubResource("RectangleShape2D_wkjbw")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Borders" groups=["borders"]]
+position = Vector2(-23, -148.319)
+scale = Vector2(31.9161, 0.258684)
+shape = SubResource("RectangleShape2D_kq250")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Borders" groups=["borders"]]
+position = Vector2(-41.9361, -92.9992)
+rotation = 1.56931
+scale = Vector2(0.372731, 0.666137)
+shape = SubResource("RectangleShape2D_jscre")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Borders" groups=["borders"]]
+position = Vector2(177.005, -242.501)
+rotation = 1.56931
+scale = Vector2(0.372731, 0.666137)
+shape = SubResource("RectangleShape2D_cmn0y")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Borders" groups=["borders"]]
+position = Vector2(380, -242)
+rotation = 1.56931
+scale = Vector2(0.372731, 0.666137)
+shape = SubResource("RectangleShape2D_qklrs")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Borders" groups=["borders"]]
+position = Vector2(279.527, -293.007)
+rotation = 1.56931
+scale = Vector2(0.372731, 0.666137)
+shape = SubResource("RectangleShape2D_w4oo5")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Borders" groups=["borders"]]
+position = Vector2(658.571, -8.25143)
+rotation = -1.57034
+scale = Vector2(0.292897, 0.666137)
+shape = SubResource("RectangleShape2D_66tpj")
+
+[node name="SceneControl" parent="." instance=ExtResource("10_gnala")]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_dpalj")
+
+[connection signal="body_entered" from="Apartment" to="." method="_on_apartment_body_entered"]
+[connection signal="body_entered" from="LevelExit" to="." method="_on_level_exit_body_entered"]

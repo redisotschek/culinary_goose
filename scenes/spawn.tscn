@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbsbbjlkgrcea"]
+
+[ext_resource type="Script" path="res://scenes/spawn.gd" id="1_xl7d6"]
+[ext_resource type="PackedScene" uid="uid://barwyr6ba7xsv" path="res://scenes/zombie.tscn" id="2_peyje"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lald0"]
+radius = 57.0088
+
+[node name="Spawn" type="Node2D"]
+script = ExtResource("1_xl7d6")
+mob_scene = ExtResource("2_peyje")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(1, -1.00002)
+rotation = -2.76116
+
+[node name="SpawnArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea"]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_lald0")
+
+[connection signal="body_entered" from="SpawnArea" to="." method="_on_body_entered"]

@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxl32v66gxneg"]
+
+[ext_resource type="PackedScene" uid="uid://cuqf7hho74apw" path="res://scenes/player.tscn" id="1_njusw"]
+[ext_resource type="SpriteFrames" uid="uid://bx3u5is5ckwft" path="res://assets/sprites/Mark.tres" id="2_3cd51"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y2by7"]
+size = Vector2(15.375, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u25sj"]
+size = Vector2(15.2344, 29.625)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jxrl3"]
+size = Vector2(15.75, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a3ne0"]
+size = Vector2(14.75, 29.5)
+
+[node name="Mark" instance=ExtResource("1_njusw")]
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = ExtResource("2_3cd51")
+
+[node name="CollisionShape2D" parent="AttackArea_left" index="0"]
+position = Vector2(-15.3125, 0)
+shape = SubResource("RectangleShape2D_y2by7")
+
+[node name="CollisionShape2D" parent="AttackArea_up" index="0"]
+position = Vector2(1.1875, -13)
+shape = SubResource("RectangleShape2D_u25sj")
+
+[node name="CollisionShape2D" parent="AttackArea_right" index="0"]
+position = Vector2(18, 0)
+shape = SubResource("RectangleShape2D_jxrl3")
+
+[node name="CollisionShape2D" parent="AttackArea_down" index="0"]
+position = Vector2(1.25, 13.625)
+shape = SubResource("RectangleShape2D_a3ne0")

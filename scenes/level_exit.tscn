@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://xf1i2wv00uoo"]
+
+[ext_resource type="Script" path="res://scenes/level_exit.gd" id="1_71wsg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l1udh"]
+size = Vector2(20, 61.0001)
+
+[node name="LevelExit" type="Area2D"]
+position = Vector2(335.053, 454.961)
+script = ExtResource("1_71wsg")
+metadata/toScene = "BolshevikovStreet"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6.99756, 21.0008)
+shape = SubResource("RectangleShape2D_l1udh")
+
+[connection signal="body_entered" from="." to="." method="_on_level_exit_body_entered"]
